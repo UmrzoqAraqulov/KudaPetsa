@@ -3,6 +3,9 @@ import HomePage from "./pages/HomePage";
 import Layout from "./components/Layout";
 import KorzinaPage from "./pages/KorzinaPage";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -12,6 +15,7 @@ const App = () => {
           <Route path="korzina" element={<KorzinaPage />} />
         </Route>
       </Routes>
+      <ToastContainer/>
     </BrowserRouter>
   );
 };

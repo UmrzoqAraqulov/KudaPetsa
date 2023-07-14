@@ -2,7 +2,7 @@ import { PropTypes } from "prop-types";
 import { products } from "../data/data";
 import { KORZINA } from "../const/const";
 import { createContext, useState } from "react";
-
+import { toast } from "react-toastify";
 
 export const korzinaContext = createContext();
 
@@ -22,10 +22,10 @@ const KorzinaContext = ({ children }) => {
     let newProdaucts;
     if (check) {
       increase(id);
-      return
-    }
-    else{
+      return;
+    } else {
       newProdaucts = [...korzinaProducts, { ...product, quantity: 1 }];
+      toast("Product added to shopping");
     }
     setLocalStorage(newProdaucts);
   };
@@ -37,23 +37,24 @@ const KorzinaContext = ({ children }) => {
       }
       return pr;
     });
+    toast.success("Product quantity update in Shopping");
     setLocalStorage(newProdaucts);
   };
 
   const decrease = (id) => {
     const product = korzinaProducts.find((el) => el.id === id);
     let newProdaucts;
-    if(product.quantity > 1){
+    if (product.quantity > 1) {
       newProdaucts = korzinaProducts.map((pr) => {
         if (pr.id === id) {
           pr.quantity -= 1;
         }
-        return pr
+        return pr;
       });
+    } else {
+      newProdaucts = korzinaProducts.filter((pr) => pr.id !== id);
     }
-    else{
-      newProdaucts = korzinaProducts.filter((pr) => pr.id!==id)
-    }
+    toast.success("Product quantity update in Shopping");
     setLocalStorage(newProdaucts);
   };
 
